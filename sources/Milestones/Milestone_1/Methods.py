@@ -49,7 +49,7 @@ def RK4(U, N, DeltaT):
         k1 = np.array(Func(U[:,i]))
         k2 = np.array(Func(U[:,i] + DeltaT * k1 / 2))
         k3 = np.array(Func(U[:,i] + DeltaT * k2 / 2))
-        k4 = np.array(Func(U[:,i] + DeltaT * k3 / 2))
+        k4 = np.array(Func(U[:,i] + DeltaT * k3))
         U_v = np.array(U[:,i])
         U_v = U_v + DeltaT/6 * (k1 + 2 * k2 + 2 * k3 + k4)
         U[:,i+1] = U_v
