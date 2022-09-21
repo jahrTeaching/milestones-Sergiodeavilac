@@ -29,6 +29,9 @@ for i in range(len(dt)): #Rugen-Kutta 4 order aproximation
 
 U_CN = MT.CN(U_CN, N, dt[1])
 print(str(U_CN))
+
+
+
 #Plot 1
 fig, ax = plt.subplots(figsize=(4,4))
 for i in range(len(dt)):

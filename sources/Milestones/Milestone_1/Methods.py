@@ -57,13 +57,15 @@ def RK4(U, N, DeltaT):
     return U
 
 #Crank-Nicolson#########################################
-def CN(U, N, DeltaT):
-    for i in range(N):
-        F = np.array(Func(U[:, i]))
-        F1 = np.array(Func(U[:, i+1]))
-        U_ = np.array(U[:, i])
-        def Crank (U1):
-            return U1 - U_ - (DeltaT / 2) * (F1 + F)
-        U[:, i+1] = fsolve(Crank, U_)
-    return U
+def CN(U, N, delta_t):
+    for i in range(0,N):
+        U1 = U[:,i]
+        def func_CN(x):
+            return [x[0] - U1[0] - (x[2] + Func(U1)[0])*delta_t/2,
+                    x[1] - U1[1] - (x[3] + Func(U1)[1])*delta_t/2,
+                    x[2] - U1[2] - (-x[0]/(x[0]**2+x[1]**2)**(3/2) + Func(U1)[2])*delta_t/2,
+                    x[3] - U1[3] - (-x[1]/(x[0]**2+x[1]**2)**(3/2) + Func(U1)[3])*delta_t/2]
+        U[:,i+1] = fsolve(func_CN, [U[0,i], U[1,i], U[2,i], U[3,i]])
+    return(U)
+
         
