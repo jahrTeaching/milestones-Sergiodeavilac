@@ -13,9 +13,9 @@ N = 10000
 dt = [0.1, 0.01, 0.001]
 
 #array of zeros
-U = np.zeros((len(dt), len(U_0), N+1)) 
-U_RK4 = np.zeros((len(dt), len(U_0), N+1))
-U_CN = np.zeros((len(dt), len(U_0), N+1))
+U = np.zeros((len(dt), len(U_0), N+1)) #Euler`s array`
+U_RK4 = np.zeros((len(dt), len(U_0), N+1)) #RK4`s array
+U_CN = np.zeros((len(dt), len(U_0), N+1)) #CN`s array
 
 #Initial conditions
 U[:,:,0] = U_0    
