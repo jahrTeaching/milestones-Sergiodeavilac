@@ -10,16 +10,17 @@ r0 = [1,0]
 v0 = [0,1]
 U_0 = r0 + v0
 N = 10000
-DeltaT = 0.01
 dt = [0.1, 0.01, 0.001]
 
-U = np.zeros((len(dt), len(U_0), N+1)) #array of zeros
-U_RK4 = np.zeros((len(dt), len(U_0), N+1))#array of zeros
-U_CN = np.zeros((len(dt), len(U_0), N+1))#array of zeros
+#array of zeros
+U = np.zeros((len(dt), len(U_0), N+1)) 
+U_RK4 = np.zeros((len(dt), len(U_0), N+1))
+U_CN = np.zeros((len(dt), len(U_0), N+1))
 
-U[:,:,0] = U_0 #Initial conditions    
-U_RK4[:,:,0] = U_0 #Initial conditions
-U_CN[:,:,0] = U_0 #Initial conditions
+#Initial conditions
+U[:,:,0] = U_0    
+U_RK4[:,:,0] = U_0 
+U_CN[:,:,0] = U_0 
 
 ###########################################################
 # Simulations
