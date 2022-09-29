@@ -22,15 +22,6 @@ def Euler(U, N, DeltaT):
         U[:, i+1] = U_v
     return U
 
-#Crank-Nicolson#########################################
-def CN(U, N, DeltaT):
-    
-    for i in range(N):
-        F = np.array(Func(U[:, i]))
-        U_v = np.array(U[:, i])
-        U_v = U_v + DeltaT/2*(F)   
-        U[:, i+1] = U_v
-    return U
 
 #Runge-Kutta segundo orden##############################  
 def RK2(U, N, DeltaT):
