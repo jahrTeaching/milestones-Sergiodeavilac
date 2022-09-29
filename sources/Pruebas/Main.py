@@ -1,22 +1,27 @@
 from numpy import zeros, linspace
-import Temporal_Schemes
+import Temporal_Schemes as TS
 from Physics import Kepler
 import matplotlib.pyplot as plt
 r0 = [1.0,0.0]
 v0 = [0.0,1.0]
 U0 = r0 + v0
 N = 10000
-dt = [0.01]
+MT = 3 
+dt = [0.1, 0.01, 0.001]
 U = zeros((len(dt), len(U0), N+1))
 U[:,:,0] = U0
 t = 0
-
-# for j in range(len(dt)):
+# for j in range(len(dt)):      
 #     for i in range(N):
-#         U[j,:,i] =Temporal_Schemes.Euler(U[j,:,i],dt[j],t, Kepler)
+#         U[j,:, i+1] = TS.Euler(U[j,:,i], dt[j], t, Kepler)
         
-for i in range(N):
-    U[0,:, i] =Temporal_Schemes.Euler(U[0,:,i],dt[0],t, Kepler)
+# for j in range(len(dt)):      
+#     for i in range(N):
+#         U[j,:, i+1] = TS.RK4(U[j,:,i], dt[j], t, Kepler)   
+
+for j in range(len(dt)):      
+    for i in range(N):
+        U[j,:, i+1] = TS.CN(U[j,:,i], dt[j], t, Kepler)  
 
 fig, ax = plt.subplots(figsize=(4, 4))
 for i in range(len(dt)):
