@@ -2,8 +2,8 @@ from numpy import zeros, linspace
 import Temporal_Schemes
 from Physics import Kepler
 import matplotlib.pyplot as plt
-r0 = [1,0]
-v0 = [0,1]
+r0 = [1.0,0.0]
+v0 = [0.0,1.0]
 U0 = r0 + v0
 N = 10000
 dt = [0.01]
