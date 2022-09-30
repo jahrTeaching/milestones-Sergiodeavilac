@@ -1,6 +1,6 @@
 from re import X
 from numpy import array, zeros, shape
-from scipy.optimize import fsolve
+from scipy.optimize import newton
 import matplotlib.pyplot as plt
 
 #Euler_Method###########################################
@@ -27,6 +27,6 @@ def CN(U, dt, t, F):
     
     a = U - dt/2 * F(U, t)
     
-    return fsolve(CN_res, U)
+    return newton(CN_res, U)
 
         
