@@ -1,4 +1,3 @@
-from re import X
 from numpy import array, zeros, shape
 from scipy.optimize import newton
 import matplotlib.pyplot as plt
@@ -23,9 +22,9 @@ def CN(U, dt, t, F):
     
     def CN_res(X):
         
-        return X - a -dt/2 * F(X, t + dt)
+        return X - U_temp -dt/2 * F(X, t + dt)
     
-    a = U - dt/2 * F(U, t)
+    U_temp = U + dt/2 * F(U, t)
     
     return newton(CN_res, U)
 
