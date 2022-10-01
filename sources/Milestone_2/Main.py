@@ -2,12 +2,12 @@ from numpy import zeros, linspace, shape
 from Cauchy_Problem import C_P
 from Physics import Kepler
 from Plots import Plot_CP
-from Temporal_Schemes import Euler, RK4, CN
+from Temporal_Schemes import Euler, RK4, CN, Euler_inver
 
 
 #Initial Conditions
-r0 = [1.0,0.0]
-v0 = [0.0,1.0]
+r0 = [1,0]
+v0 = [0,1]
 U0 = r0 + v0
 N = [1000, 10000, 100000]
 
@@ -15,8 +15,8 @@ N = [1000, 10000, 100000]
 Save = True # TRue Save the plots / False show the plots
 
 #Temporal_Schemes to use
-T_S = [Euler, RK4, CN]
-T_S_plot = ["Euler", "RK4", "CN"]
+T_S = [Euler, RK4, CN, Euler_inver]
+T_S_plot = ["Euler", "RK4", "CN", 'Euler_inver']
 
 
 #Initiation of Dictionaries

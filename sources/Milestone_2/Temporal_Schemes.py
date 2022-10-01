@@ -1,5 +1,5 @@
 from numpy import array, zeros, shape
-from scipy.optimize import newton
+from scipy.optimize import newton, fsolve
 import matplotlib.pyplot as plt
 
 #Euler_Method###########################################
@@ -20,12 +20,19 @@ def RK4(U, dt, t, F):
 #Crank-Nicolson#########################################
 def CN(U, dt, t, F):
     
-    def CN_res(X):
+    def CN_res(x):
         
-        return X - U_temp -dt/2 * F(X, t + dt)
+        return x - U_temp -dt/2 * F(x, t + dt)
     
     U_temp = U + dt/2 * F(U, t)
     
     return newton(CN_res, U)
 
+#Euler_inverso#########################################
+def Euler_inver(U, dt, t, F):
+    def Euler_res(x):
+        
+        return x - U - dt*F(x,t)
+
+    return fsolve(Euler_res, U)
         
