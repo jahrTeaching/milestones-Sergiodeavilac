@@ -17,7 +17,7 @@ def Plot_CP (U,t, T_S, Save):
     else:
         ##Save Plots
         file = T_S + "_dt_" + str(dt) +".png"
-        path = os.path.join(os.path.dirname(os.path.abspath("Main_ML2.py")), 'Plots')
+        path = os.path.join(os.path.dirname(os.path.abspath("Main.py")), 'Plots')
         
         if not os.path.exists(path):
             os.makedirs(path)
