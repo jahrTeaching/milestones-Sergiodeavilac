@@ -1,6 +1,7 @@
 from numpy import array, zeros, shape
-from scipy.optimize import newton, fsolve
+from scipy.optimize import fsolve
 import matplotlib.pyplot as plt
+from Jab_Newt import Newton
 
 #Euler_Method###########################################
 def Euler(U , dt, t, F):
@@ -26,7 +27,7 @@ def CN(U, dt, t, F):
     
     U_temp = U + dt/2 * F(U, t)
     
-    return newton(CN_res, U)
+    return fsolve(CN_res, U)
 
 #Euler_inverso#########################################
 def Euler_inver(U, dt, t, F):
