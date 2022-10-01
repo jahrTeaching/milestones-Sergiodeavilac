@@ -6,10 +6,9 @@ def C_P(F, t, U0,T_S):
     U = zeros( (len(U0), N+1 ) )
     U[:,0] = U0
      
-    dt = t[1] - t[0] 
     for i in range(N):
         
-        U[:, i+1] = T_S(U[:,i] , dt, t[i], F)
+        U[:, i+1] = T_S(U[:,i] , t[i+1]-t[i], t[i], F)
     
     return U
     
