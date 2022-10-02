@@ -17,7 +17,7 @@ def Plot_CP(U,t, T_S, Save):
     else:
         ##Save Plots
         file = T_S + "_dt_" + str(dt) +".png"
-        path = os.path.join(os.path.dirname(os.path.abspath("Main.py")), 'Plots')
+        path = os.path.join(os.getcwd(), 'Plots')
         
         if not os.path.exists(path):
             os.makedirs(path)
@@ -40,13 +40,13 @@ def Plot_CP_all(U,t, T_S, Save):
     else:
         ##Save Plots
         file = T_S + ".png"
-        path = os.path.join(os.path.dirname(os.path.abspath("Main.py")), 'Plots')
+        path = os.path.join(os.getcwd(), 'Plots')
         
         if not os.path.exists(path):
             os.makedirs(path)
         
         plt.savefig(os.path.join(path,file)) 
-        
+       
     
     
     

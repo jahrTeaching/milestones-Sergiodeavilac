@@ -1,8 +1,8 @@
 from numpy import zeros, linspace, shape
-from Cauchy_Problem import C_P
-from Physics import Kepler
-from Plots import Plot_CP, Plot_CP_all
-from Temporal_Schemes import Euler, RK4, Crank_Nicolson, Inverse_Euler
+from ODES.Cauchy_Problem import C_P
+from Problems.Physics import Kepler
+from Graf.Plots import Plot_CP, Plot_CP_all
+from ODES.Temporal_Schemes import Euler, RK4, Crank_Nicolson, Inverse_Euler
 
 
 #Initial Conditions
@@ -12,7 +12,7 @@ U0 = r0 + v0
 N = [1000, 10000, 100000]
 
 #Save Plots
-Save = False # TRue Save the plots / False show the plots
+Save = True # TRue Save the plots / False show the plots
 
 #Temporal_Schemes to use
 T_S = [Euler, RK4, Crank_Nicolson, Inverse_Euler]
