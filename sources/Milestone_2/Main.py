@@ -12,13 +12,12 @@ U0 = r0 + v0
 N = [1000, 10000, 100000]
 
 #Save Plots
-Save = True # TRue Save the plots / False show the plots
+Save = False # TRue Save the plots / False show the plots
 
 #Temporal_Schemes to use
 T_S = [Euler, RK4, Crank_Nicolson, Inverse_Euler]
 T_S_plot = ["Euler", "RK4", "CN", 'Euler_inver']
-# T_S = [Euler]
-# T_S_plot = ['Euler']
+
 
 #Initiation of Dictionaries
 U_dic = { }
