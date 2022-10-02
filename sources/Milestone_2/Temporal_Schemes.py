@@ -19,7 +19,7 @@ def RK4(U, dt, t, F):
     return U + dt/6 * (k1 + 2 * k2 + 2 * k3 + k4)
 
 #Crank-Nicolson#########################################
-def CN(U, dt, t, F):
+def Crank_Nicolson(U, dt, t, F):
     
     def CN_res(x):
         
@@ -30,7 +30,7 @@ def CN(U, dt, t, F):
     return fsolve(CN_res, U)
 
 #Euler_inverso#########################################
-def Euler_inver(U, dt, t, F):
+def Inverse_Euler(U, dt, t, F):
     def Euler_res(x):
         
         return x - U - dt*F(x,t)
