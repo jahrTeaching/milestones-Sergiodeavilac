@@ -12,7 +12,7 @@ U0 = r0 + v0
 N = [1000, 10000, 100000]
 
 #Save Plots
-Save = True # TRue Save the plots / False show the plots
+Save = False # TRue Save the plots / False show the plots
 
 #Temporal_Schemes to use
 T_S = [Euler, RK4, Crank_Nicolson, Inverse_Euler]
