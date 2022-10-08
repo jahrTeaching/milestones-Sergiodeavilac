@@ -1,6 +1,5 @@
 from numpy import array, zeros, shape
 from scipy.optimize import fsolve
-import matplotlib.pyplot as plt
 from ODES.Jab_Newt import Newton
 
 #Euler_Method###########################################
