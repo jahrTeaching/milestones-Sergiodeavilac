@@ -8,7 +8,7 @@ def C_P(F, t, U0,T_S):
      
     for i in range(N):
         
-        U[:, i+1] = T_S(U[:,i] , t[i+1]-t[i], t[i], F)
+        U[:, i+1] = T_S(U[:,i], t[i+1]-t[i], t[i], F)
     
     return U
     
