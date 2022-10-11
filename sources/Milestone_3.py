@@ -10,7 +10,9 @@ from Error.Richarson import Richarson
 r0 = [1,0]
 v0 = [0,1]
 U0 = r0 + v0
-N = [1000]
+T = [20]
+dt = [0.01]
+
 
 #Save Plots
 Save = False # TRue Save the plots / False show the plots
@@ -25,13 +27,17 @@ Order = [1]
 #Initiation of Dictionaries
 U_dic = { }
 t_dic = { }
-
+N = zeros((len(T)))
 #Times for simulations
+for i in range(len(T)):
+        N[i] = int(T[i]/dt[i])
 for i in range(len(N)):
-        t_dic[str(i)] = linspace(0,20,N[i])
+        t_dic[str(i)] = linspace(0,T[i], int(N[i]))
 
-for x in t_dic:
-    Er = Richarson(U0, t_dic[x], Kepler, T_S, C_P, Order)
+for j in range(len(T_S)):
+    for x in t_dic:
+        Er = Richarson(U0, t_dic[x], Kepler, T_S[j], C_P, Order[j])
+print (Er)
 
 #Simulations
 # for j in range ( len(T_S_plot) ):
