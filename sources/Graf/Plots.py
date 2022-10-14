@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import os
 
-
 def Plot_CP(U,t, T_S, Save):
     fig, ax = plt.subplots(figsize=(4, 4))
     dt = t[1]-t[0] 
@@ -55,16 +54,15 @@ def Plot_Er_compare(Er,t, dt, T_S, Save):
     file = T_S + '_comprare' + ".png"
     Save_plot(Save, file)
     
-
 def Plot_Conv_Rat(x,y, T_S, Save):
     fig, ax = plt.subplots(figsize=(4, 4))
     ax.plot(x,y, label= T_S)
-    ax.set_xlabel('x')
-    ax.set_ylabel('y')
+    ax.set_xlabel('Log_N')
+    ax.set_ylabel('Log_Er')
     ax.set_title(T_S)
     ax.legend()
     
-    file = T_S + ".png"
+    file = T_S +'_conver' + ".png"
     Save_plot(Save, file)
     
 def Save_plot(Save, file):

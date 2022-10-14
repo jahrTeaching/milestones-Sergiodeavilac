@@ -1,6 +1,7 @@
 from cv2 import log
 from numpy import array, linspace, zeros, size, shape, log10
 from numpy.linalg import norm
+from alive_progress import alive_bar #to see the progress of the computations
 
 def Richarson(U0, t1, F, T_S, problem, order):
     
@@ -39,15 +40,20 @@ def Convergence_rate(U0, t1, F, T_S, problem, order):
     # t2[2*N] = t1[N]
 
     U2 = zeros( shape(U1) )
-    for i in range(m):
-        Nt2 = 2*Nt2
-        t2 = linspace(0, t1[-1],Nt2) #t[-1] return the last value of the vector or list
-        U2 = problem(F, t2, U0, T_S)
-        log_Er[i] = log10(norm( ( U2[:, -1]- U1[:,-1] ) ))
-        log_N[i] = log10(Nt2)
+    with alive_bar(m) as bar:
+        for i in range(m):
+            Nt2 = 2*Nt2
+            t2 = linspace(0, t1[-1],Nt2) #t[-1] return the last value of the vector or list
+            U2 = problem(F, t2, U0, T_S)
+            log_Er[i] = log10(norm(  U2[:, -1]- U1[:,-1] ) )
+            log_N[i] = log10(Nt2)
+            t1 = t2
+            U1 = U2
+            bar()
+        
+        
     print(log_Er)  
-    # for i in range(m):
-    #     if ( abs(log_Er[j]) > 12 )
+
     return log_Er, log_N
     
     
