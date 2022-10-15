@@ -1,7 +1,8 @@
-from cv2 import log
 from numpy import array, linspace, zeros, size, shape, log10
 from numpy.linalg import norm
 from alive_progress import alive_bar #to see the progress of the computations
+from scipy.stats import linregress
+
 
 def Richarson(U0, t1, F, T_S, problem, order):
     
@@ -24,7 +25,7 @@ def Richarson(U0, t1, F, T_S, problem, order):
 
     return Er
 
-def Convergence_rate(U0, t1, F, T_S, problem, order):
+def Convergence_rate(U0, t1, F, T_S, problem):
     
     m = 10 #number of points
     N = size(t1) - 1
@@ -50,12 +51,11 @@ def Convergence_rate(U0, t1, F, T_S, problem, order):
             t1 = t2
             U1 = U2
             bar()
-        
-        
-    print(log_Er)  
-
-    return log_Er, log_N
-    
+            
+    regress = linregress(log_N, log_Er) #Its's a object with all the information
+    order = regress.rvalue**2
+            
+    return log_Er, log_N, regress
     
     
     

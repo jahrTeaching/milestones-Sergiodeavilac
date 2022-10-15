@@ -1,8 +1,10 @@
+from tkinter import Label
+from turtle import color
 import matplotlib.pyplot as plt
 import os
 
 def Plot_CP(U,t, T_S, Save):
-    fig, ax = plt.subplots(figsize=(4, 4))
+    fig, ax = plt.subplots( figsize = (10, 10) )
     dt = t[1]-t[0] 
     ax.plot(U[0,:], U[1,:], label= T_S + "dt " + str(dt))
     ax.set_xlabel('x')
@@ -14,7 +16,7 @@ def Plot_CP(U,t, T_S, Save):
     Save_plot(Save, file)
         
 def Plot_CP_all(U,t, T_S, Save):
-    fig, ax = plt.subplots(figsize=(10, 10))
+    fig, ax = plt.subplots( figsize=(10, 10) )
     for i in t:
         dt = t[i][1]-t[i][0] 
         ax.plot(U[i][0,:], U[i][1,:], label= T_S + " dt " + str(dt))
@@ -27,9 +29,9 @@ def Plot_CP_all(U,t, T_S, Save):
     Save_plot(Save, file)
 
 def Plot_Er(Er,t, dt, T_S, Save):
-    fig, ax = plt.subplots(figsize=(4, 4))
-    ax.plot(t,Er[0,:], label= T_S + " dt " + str(dt))
-    ax.plot(t, Er[1,:], label= T_S + " dt " + str(dt))
+    fig, ax = plt.subplots( figsize = (10, 10) )
+    ax.plot(t,Er[0,:], color = 'b' , label = 'Er_x' )
+    ax.plot(t, Er[1,:],color = 'r', label =  'Er_y' )
     ax.set_xlabel('t')
     ax.set_ylabel('Er')
     ax.set_title(T_S)
@@ -40,9 +42,10 @@ def Plot_Er(Er,t, dt, T_S, Save):
 
 def Plot_Er_compare(Er,t, dt, T_S, Save):
     fig, (ax, ay) = plt.subplots(2,1,figsize=(15, 15))
+    colors = ['r','b','g']
     for i in t:
-        ax.plot(t[i],Er[i][0,:], label= T_S + " dt " + str(dt[int(i)]))
-        ay.plot(t[i],Er[i][1,:], label= T_S + " dt " + str(dt[int(i)]))
+        ax.plot(t[i],Er[i][0,:], color = colors[int(i)], label= T_S + " dt " + str(dt[int(i)]))
+        ay.plot(t[i],Er[i][1,:], color = colors[int(i)], label= T_S + " dt " + str(dt[int(i)]))
     ax.set_xlabel('t')
     ax.set_ylabel('Er_x')
     ay.set_xlabel('t')
@@ -54,15 +57,16 @@ def Plot_Er_compare(Er,t, dt, T_S, Save):
     file = T_S + '_comprare' + ".png"
     Save_plot(Save, file)
     
-def Plot_Conv_Rat(x,y, T_S, Save):
-    fig, ax = plt.subplots(figsize=(4, 4))
-    ax.plot(x,y, label= T_S)
+def Plot_Conv_Rat(x, y, dt, regress, T_S, Save):
+    fig, ax = plt.subplots(figsize = (10, 10))
+    ax.plot(x,y, color = 'b', label = 'Numerical results')
+    ax.plot(x, regress.intercept + regress.slope*x, '--', color = 'r',  label = 'linear regression')
     ax.set_xlabel('Log_N')
     ax.set_ylabel('Log_Er')
-    ax.set_title(T_S)
+    ax.set_title(T_S + 'dt = ' + str(dt) + '. Order' + str(regress.rvalue**2))
     ax.legend()
     
-    file = T_S +'_conver' + ".png"
+    file = T_S +'_dt_'+ str(dt) +'_conver' + ".png"
     Save_plot(Save, file)
     
 def Save_plot(Save, file):
