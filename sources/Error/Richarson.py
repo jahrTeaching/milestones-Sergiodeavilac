@@ -53,7 +53,6 @@ def Convergence_rate(U0, t1, F, T_S, problem):
             bar()
             
     regress = linregress(log_N, log_Er) #Its's a object with all the information
-    order = regress.rvalue**2
             
     return log_Er, log_N, regress
     

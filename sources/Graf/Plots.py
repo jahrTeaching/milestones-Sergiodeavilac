@@ -57,13 +57,13 @@ def Plot_Er_compare(Er,t, dt, T_S, Save):
     file = T_S + '_comprare' + ".png"
     Save_plot(Save, file)
     
-def Plot_Conv_Rat(x, y, dt, regress, T_S, Save):
+def Plot_Conv_Rat(x, y, T, dt, regress, T_S, Save):
     fig, ax = plt.subplots(figsize = (10, 10))
     ax.plot(x,y, color = 'b', label = 'Numerical results')
     ax.plot(x, regress.intercept + regress.slope*x, '--', color = 'r',  label = 'linear regression')
     ax.set_xlabel('Log_N')
     ax.set_ylabel('Log_Er')
-    ax.set_title(T_S + 'dt = ' + str(dt) + '. Order' + str(regress.rvalue**2))
+    ax.set_title(T_S + ': T = ' + str(T) +', dt = ' + str(dt) + '. R^2 = ' + str(round(regress.rvalue**2,3)) + ' & Order = ' + str(round(abs(regress.slope),3)))
     ax.legend()
     
     file = T_S +'_dt_'+ str(dt) +'_conver' + ".png"

@@ -12,17 +12,17 @@ v0 = [0,1]
 U0 = r0 + v0
 T = 10
 dt = [0.1, 0.01, 0.001]
-# dt = [0.1]
+# dt = [0.1, 0.15, 0.2]
 
 #Save Plots
-Save = False # TRue Save the plots / False show the plots
+Save = True # TRue Save the plots / False show the plots
 
 #Temporal_Schemes to use
 T_S = [Euler, RK4, Crank_Nicolson, Inverse_Euler]
 T_S_plot = ["Euler", "RK4", "CN", 'Euler_inver']
 Order = [1, 4, 2, 1]
-# T_S = [Euler]
-# T_S_plot = ["Euler"]
+# T_S = [RK4]
+# T_S_plot = ["RK4"]
 # Order = [1]
 
 #Initiation of Dictionaries
@@ -47,5 +47,5 @@ for j in range(len(T_S)):
     for x in t_dic:
         log_Er, log_N, regress = Convergence_rate(U0, t_dic[x], Kepler, T_S[j], C_P)
         print( '\n' +T_S_plot[j] + ' Calculado \n' )
-        plt.Plot_Conv_Rat(log_N, log_Er,dt[int(x)],regress, T_S_plot[j], Save)
+        plt.Plot_Conv_Rat(log_N, log_Er, T, dt[int(x)],regress, T_S_plot[j], Save)
 
