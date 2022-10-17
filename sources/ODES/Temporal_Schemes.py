@@ -1,6 +1,6 @@
 from numpy import array, zeros, shape
 from scipy.optimize import fsolve
-from ODES.Jab_Newt import Newton
+from ODES.Jab_Newt import Newton, Newton_LU
 
 #Euler_Method###########################################
 def Euler(U , dt, t, F):

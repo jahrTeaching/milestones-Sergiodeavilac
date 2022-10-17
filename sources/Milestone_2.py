@@ -10,7 +10,7 @@ r0 = [1,0]
 v0 = [0,1]
 U0 = r0 + v0
 # N = [1000, 10000, 100000]
-N = [1000]
+N = [100000]
 
 #Save Plots
 Save = False # TRue Save the plots / False show the plots

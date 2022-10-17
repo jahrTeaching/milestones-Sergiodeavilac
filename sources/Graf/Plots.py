@@ -28,19 +28,19 @@ def Plot_CP_all(U,t, T_S, Save):
     file = T_S + ".png"
     Save_plot(Save, file)
 
-def Plot_Er(Er,t, dt, T_S, Save):
+def Plot_Er(Er,t, T, dt, T_S, Save):
     fig, ax = plt.subplots( figsize = (10, 10) )
     ax.plot(t,Er[0,:], color = 'b' , label = 'Er_x' )
     ax.plot(t, Er[1,:],color = 'r', label =  'Er_y' )
     ax.set_xlabel('t')
     ax.set_ylabel('Er')
-    ax.set_title(T_S)
+    ax.set_title(T_S + ' dt = ' + str(dt) + ' T = ' + str(T) )
     ax.legend()
     
-    file = T_S + "_dt_" + str(dt) +".png"
+    file = T_S + "_dt_" + str(dt) + '_T_' + str(T)  +".png"
     Save_plot(Save, file)
 
-def Plot_Er_compare(Er,t, dt, T_S, Save):
+def Plot_Er_compare(Er,t, T, dt, T_S, Save):
     fig, (ax, ay) = plt.subplots(2,1,figsize=(15, 15))
     colors = ['r','b','g']
     for i in t:
@@ -50,11 +50,11 @@ def Plot_Er_compare(Er,t, dt, T_S, Save):
     ax.set_ylabel('Er_x')
     ay.set_xlabel('t')
     ay.set_ylabel('Er_y')
-    ax.set_title(T_S + ' Er')
+    ax.set_title(T_S + ' Er' + ' T = ' + str(T))
     ax.legend()
     ay.legend()
     
-    file = T_S + '_comprare' + ".png"
+    file = T_S + '_comprare_T' + str(T) + ".png"
     Save_plot(Save, file)
     
 def Plot_Conv_Rat(x, y, T, dt, regress, T_S, Save):

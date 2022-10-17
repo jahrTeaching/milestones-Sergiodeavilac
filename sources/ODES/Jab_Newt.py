@@ -22,14 +22,14 @@ def LU(A):
             
     for i in range(k+1,N):
          A[i,k] =(A[i,k] - dot(A[0:k,k], A[i,0:k])) / (A[k,k])
-
+         
     return A
 
 def solve_LU(A,b):
+    
     x = zeros(size(b))
     y = zeros(size(b))
     
-   
     A = LU(A)
     y[0] = b[0]
     
@@ -45,16 +45,16 @@ def solve_LU(A,b):
 
 def Inversa(A):
 
-	B = zeros([size(A,1), size(A,1)])
+    B = zeros([size(A,1), size(A,1)])
 
-	for i in range(size(A,1)):
-     
-		a = zeros(size(A,1))
-		a[i] = 1
+    for i in range(size(A,1)):
+        
+        a = zeros(size(A,1))
+        a[i] = 1
 
-		B[:,i] = solve_LU(A, a)
-
-	return B
+        B[:,i] = solve_LU(A, a)
+    
+    return B
         
 def Newton(F,x0):
     N = size(x0)
@@ -72,17 +72,18 @@ def Newton(F,x0):
         eps = norm(dx)
     return x0
 
-# def Newton(F,x0):
-#     N = size(x0)
-#     dx = 2 * x0
-#     it = 0 #Initialization of iterations
-#     itmax = 1000 #max iterations
-#     eps = 1 # initial error
+def Newton_LU(F,x0):
+    N = size(x0)
+    dx = 2 * x0
+    it = 0 #Initialization of iterations
+    itmax = 1000 #max iterations
+    eps = 1 # initial error
     
-#     while (eps > 1e-8) and (it <= itmax):
-#         it = it + 1
-#         dx = dot( Inversa(Jacobiano(F, x0)), F(x0))
-#         x0 = x0 - dx
-#         eps = norm(dx)
-#     return x0
+    while (eps > 1e-8) and (it <= itmax):
+        it = it + 1
+        dx = dot( Inversa(Jacobiano(F, x0)), F(x0))
+        x0 = x0 - dx
+        eps = norm(dx)
+        
+    return x0
 
