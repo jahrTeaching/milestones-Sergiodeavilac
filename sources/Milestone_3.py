@@ -4,7 +4,6 @@ from Problems.Physics import Kepler
 from ODES.Temporal_Schemes import Euler, RK4, Crank_Nicolson, Inverse_Euler
 from Error.Richarson import Richarson, Convergence_rate
 from alive_progress import alive_bar #to see the progress of the computations
-
 import Graf.Plots as plt
 
 
@@ -17,14 +16,14 @@ dt = [0.1, 0.01, 0.001]
 # dt = [0.1, 0.15, 0.2]
 
 #Save Plots
-Save = True # TRue Save the plots / False show the plots
+Save = True # True Save the plots / False show the plots
 
-#Temporal_Schemes to use
+# Temporal_Schemes to use
 T_S = [Euler, RK4, Crank_Nicolson, Inverse_Euler]
 T_S_plot = ["Euler", "RK4", "CN", 'Euler_inver']
 Order = [1, 4, 2, 1]
-# T_S = [Inverse_Euler]
-# T_S_plot = ["Euler_inver"]
+# T_S = [Euler]
+# T_S_plot = ["Euler"]
 # Order = [1]
 
 #Initiation of Dictionaries
@@ -32,7 +31,7 @@ Er_dic = { }
 t_dic = { }
 N = zeros((len(dt)))
 
-#Times for simulations
+#Iterations and times
 for i in range(len(dt)):
         N[i] = int(T/dt[i])
         t_dic[str(i)] = linspace(0,T, int(N[i]))

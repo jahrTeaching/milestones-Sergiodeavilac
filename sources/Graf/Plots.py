@@ -30,8 +30,8 @@ def Plot_CP_all(U,t, T_S, Save):
 
 def Plot_Er(Er,t, T, dt, T_S, Save):
     fig, ax = plt.subplots( figsize = (10, 10) )
-    ax.plot(t,Er[0,:], color = 'b' , label = 'Er_x' )
-    ax.plot(t, Er[1,:],color = 'r', label =  'Er_y' )
+    ax.plot(t, Er[0,:], color = 'b' , label = 'Er_x' )
+    ax.plot(t, Er[1,:], color = 'r', label =  'Er_y' )
     ax.set_xlabel('t')
     ax.set_ylabel('Er')
     ax.set_title(T_S + ' dt = ' + str(dt) + ' T = ' + str(T) )
