@@ -3,7 +3,7 @@ from turtle import color
 import matplotlib.pyplot as plt
 import os
 
-def Plot_CP(U,t, T_S, Save):
+def Plot_CP(U,t, T, dt, T_S, Save):
     fig, ax = plt.subplots( figsize = (10, 10) )
     dt = t[1]-t[0] 
     ax.plot(U[0,:], U[1,:], label= T_S + "dt " + str(dt))
@@ -15,14 +15,14 @@ def Plot_CP(U,t, T_S, Save):
     file = T_S + "_dt_" + str(dt) +".png"
     Save_plot(Save, file)
         
-def Plot_CP_all(U,t, T_S, Save):
+def Plot_CP_all(U,t, T, dt, T_S, Save):
     fig, ax = plt.subplots( figsize=(10, 10) )
+    colors = ['r','b','g']
     for i in t:
-        dt = t[i][1]-t[i][0] 
-        ax.plot(U[i][0,:], U[i][1,:], label= T_S + " dt " + str(dt))
+        ax.plot(U[i][0,:], U[i][1,:], color = colors[int(i)], label= T_S + " dt " + str(dt[int(i)]))
     ax.set_xlabel('x')
     ax.set_ylabel('y')
-    ax.set_title(T_S)
+    ax.set_title(T_S + ' compare dt for T = ' + str(T))
     ax.legend()
     
     file = T_S + ".png"
