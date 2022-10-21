@@ -1,6 +1,5 @@
-from tkinter import Label
-from turtle import color
 import matplotlib.pyplot as plt
+from numpy import sqrt
 import os
 
 def Plot_CP(U,t, T, dt, T_S, Save):
@@ -41,18 +40,23 @@ def Plot_Er(Er,t, T, dt, T_S, Save):
     Save_plot(Save, file)
 
 def Plot_Er_compare(Er,t, T, dt, T_S, Save):
-    fig, (ax, ay) = plt.subplots(2,1,figsize=(15, 15))
+    fig, (ax, ay, az) = plt.subplots(3,1,figsize=(15, 15))
     colors = ['r','b','g']
     for i in t:
+        Er_n = sqrt(Er[i][0,:]**2 + Er[i][1,:]**2)
         ax.plot(t[i],Er[i][0,:], color = colors[int(i)], label= T_S + " dt " + str(dt[int(i)]))
         ay.plot(t[i],Er[i][1,:], color = colors[int(i)], label= T_S + " dt " + str(dt[int(i)]))
+        az.plot(t[i],Er_n, color = colors[int(i)], label = 'Norm' + " dt " + str(dt[int(i)]))
     ax.set_xlabel('t')
     ax.set_ylabel('Er_x')
     ay.set_xlabel('t')
     ay.set_ylabel('Er_y')
+    az.set_xlabel('t')
+    az.set_ylabel('Er_norm')
     ax.set_title(T_S + ' Er' + ' T = ' + str(T))
     ax.legend()
     ay.legend()
+    az.legend()
     
     file = T_S + '_comprare_T' + str(T) + ".png"
     Save_plot(Save, file)
