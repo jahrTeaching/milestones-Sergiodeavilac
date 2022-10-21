@@ -16,7 +16,7 @@ dt = [0.01]
 # dt = [0.1, 0.15, 0.2]
 
 #Save Plots
-Save = True # True Save the plots / False show the plots
+Save = False # True Save the plots / False show the plots
 
 # Temporal_Schemes to use
 # T_S = [Euler, RK4, Crank_Nicolson, Inverse_Euler]

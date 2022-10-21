@@ -34,7 +34,7 @@ def LU(A):
 
 	return L@U
 
-def solve_LU(A,b):
+def GAUSS(A,b):
     
     x = zeros(size(b))
     y = zeros(size(b))
@@ -61,7 +61,7 @@ def Inversa(A):
         a = zeros(size(A,1))
         a[i] = 1
 
-        B[:,i] = solve_LU(A, a)
+        B[:,i] = GAUSS(A, a)
     
     return B
         
