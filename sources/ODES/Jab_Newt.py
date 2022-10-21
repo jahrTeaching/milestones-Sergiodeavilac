@@ -13,17 +13,26 @@ def Jacobiano (F, xp):
     return Jab
 
 def LU(A):
-    N = size(A,1)
-    A[1:N,0] = A[1:N,1] / A[0,0]
-    
-    for k in range (1,N):
-        for j in range(k,N):
-            A[k,j] = A[k,j] - dot( A[k, 1:k-1], A[1:k-1, j] )
-            
-    for i in range(k+1,N):
-         A[i,k] =(A[i,k] - dot(A[0:k,k], A[i,0:k])) / (A[k,k])
-         
-    return A
+	N = size(A,1)
+	U = zeros([N,N])
+	L = zeros([N,N])
+
+	U[0,:] = A[0,:]
+	for k in range(0,N):
+		L[k,k] = 1
+
+	L[1:N,0] = A[1:N,0]/U[0,0]
+
+
+	for k in range(1,N):
+
+		for j in range(k,N):
+			U[k,j] = A[k,j] - dot(L[k,0:k], U[0:k,j])
+
+		for i in range(k+1,N):
+			L[i,k] =(A[i,k] - dot(U[0:k,k], L[i,0:k])) / (U[k,k])
+
+	return L@U
 
 def solve_LU(A,b):
     
@@ -33,12 +42,12 @@ def solve_LU(A,b):
     A = LU(A)
     y[0] = b[0]
     
-    for i in range(1, size(b) ):
+    for i in range(size(b) ):
         y[i] = b[i] - dot( A[i,0:i], y[0:i] )
         
-    x[-1] = y[-1] / A[-1,-1]
+    x[size(b)-1] = y[size(b)-1] / A[size(b)-1,size(b)-1]
     
-    for i in range(-1, 1, -1):
+    for i in range(size(b)-2, -1, -1):
         x[i] = ((y[i] - dot(A[i, i+1:size(b)+1], x[i+1:size(b)+1])) / A[i,i])
     
     return x

@@ -4,7 +4,6 @@ import os
 
 def Plot_CP(U,t, T, dt, T_S, Save):
     fig, ax = plt.subplots( figsize = (10, 10) )
-    dt = t[1]-t[0] 
     ax.plot(U[0,:], U[1,:], label= T_S + "dt " + str(dt))
     ax.set_xlabel('x')
     ax.set_ylabel('y')

@@ -34,5 +34,5 @@ def Inverse_Euler(U, dt, t, F):
         
         return x - U - dt*F(x,t)
 
-    return fsolve(Euler_res, U)
+    return Newton_LU(Euler_res, U)
         
