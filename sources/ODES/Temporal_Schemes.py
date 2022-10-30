@@ -1,4 +1,4 @@
-from numpy import array, zeros, shape
+from numpy import array, zeros, shape, size
 from scipy.optimize import fsolve
 from ODES.Jab_Newt import Newton, Newton_LU
 
@@ -35,4 +35,16 @@ def Inverse_Euler(U, dt, t, F):
         return x - U - dt*F(x,t)
 
     return Newton_LU(Euler_res, U)
-        
+
+#LeapFrog
+def LeapFrog(U, dt, t, F):
+     
+    N = int(len(U)/2)
+    X = U
+    A = F(X,t)
+    X[N:] += A[N:]*dt / 2
+    X[:N] += X[:N]*dt
+    A = F(X,t)
+    X[N:] += A[N:]*dt / 2
+    
+    return X

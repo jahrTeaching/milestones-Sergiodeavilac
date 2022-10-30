@@ -2,9 +2,9 @@ import matplotlib.pyplot as plt
 from numpy import sqrt
 import os
 
-def Plot_CP(U,t, T, dt, T_S, Save):
+def Plot_CP(U, t, T, dt, T_S, Save):
     fig, ax = plt.subplots( figsize = (10, 10) )
-    ax.plot(U[0,:], U[1,:], label= T_S + "dt " + str(dt))
+    ax.plot(t, U[0,:], label = T_S + "dt " + str(dt))
     ax.set_xlabel('x')
     ax.set_ylabel('y')
     ax.set_title(T_S)
@@ -13,11 +13,11 @@ def Plot_CP(U,t, T, dt, T_S, Save):
     file = T_S + "_dt_" + str(dt) +".png"
     Save_plot(Save, file)
         
-def Plot_CP_all(U,t, T, dt, T_S, Save):
+def Plot_CP_all(U, t, T, dt, T_S, Save):
     fig, ax = plt.subplots( figsize=(10, 10) )
     colors = ['r','b','g']
     for i in t:
-        ax.plot(U[i][0,:], U[i][1,:], color = colors[int(i)], label= T_S + " dt " + str(dt[int(i)]))
+        ax.plot(t[i], U[i][0,:], color = colors[int(i)], label= T_S + " dt " + str(dt[int(i)]))
     ax.set_xlabel('x')
     ax.set_ylabel('y')
     ax.set_title(T_S + ' compare dt for T = ' + str(T))
@@ -71,6 +71,14 @@ def Plot_Conv_Rat(x, y, T, dt, regress, T_S, Save):
     
     file = T_S +'_dt_'+ str(dt) +'_conver' + ".png"
     Save_plot(Save, file)
+
+def Plot_SR(w,T_S, Save):
+    fig,ax = plt.subplots(figsize = (10,10))
+    ax.plot =(w.real, w.imag)
+    
+    file = 'Stability Region of ' + T_S + ".png"
+    Save_plot(Save, file)
+    
     
 def Save_plot(Save, file):
     
@@ -87,4 +95,5 @@ def Save_plot(Save, file):
         
         plt.savefig(os.path.join(path,file)) 
     
+
     

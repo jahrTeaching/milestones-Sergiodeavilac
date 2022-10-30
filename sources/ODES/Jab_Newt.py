@@ -31,7 +31,7 @@ def LU(A):
 
 		for i in range(k+1,N):
 			L[i,k] =(A[i,k] - dot(U[0:k,k], L[i,0:k])) / (U[k,k])
-
+ 
 	return L@U
 
 def GAUSS(A,b):

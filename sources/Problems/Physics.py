@@ -8,4 +8,8 @@ def Kepler(U, t):
 
     return  array( [ x_dot, y_dot, -x/d, -y/d ] ) 
 
+
+def Linear_Oscilator(U,t):
+    
+    return array([U[1], -U[0]])
         
