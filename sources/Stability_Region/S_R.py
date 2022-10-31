@@ -1,6 +1,4 @@
 from numpy import sqrt, linspace, zeros, absolute, array
-from scipy.special import factorial
-
 
 def Stability_Region(T_S):
     N = 100
