@@ -9,21 +9,21 @@ import Graf.Plots as plt
 
 #Initial Conditions
 r0 = [1]
-v0 = [1]
+v0 = [0]
 U0 = r0 + v0
 T = 100
-dt = [0.01]
+dt = [0.1, 0.01, 0.001]
 # dt = [0.1, 0.15, 0.2]
 
 #Save Plots
-Save = False # True Save the plots / False show the plots
+Save = True # True Save the plots / False show the plots
 
-# Temporal_Schemes to use
-# T_S = [Euler, RK4, Crank_Nicolson, Inverse_Euler]
-# T_S_plot = ["Euler", "RK4", "CN", 'Euler_inver']
-# Order = [1, 4, 2, 1]
-T_S = [Euler]
-T_S_plot = ["Euler"]
+# # Temporal_Schemes to use
+T_S = [Euler, RK4, Crank_Nicolson, Inverse_Euler, LeapFrog]
+T_S_plot = ["Euler", "RK4", "CN", 'Euler_inver', "LeapFrog"]
+
+# T_S = [LeapFrog]
+# T_S_plot = ["LeapFrog"]
 
 
 #Initiation of Dictionaries
@@ -51,4 +51,4 @@ for i in range(len(dt)):
 
 for i in range( len(T_S_plot) ):
         S_R[i] = Stability_Region(T_S_plot[i])
-        plt.Plot_SR(S_R[i], T_S_plot[i], Save)
+        plt.Plot_SR(S_R[i], dt, T_S_plot[i], Save)

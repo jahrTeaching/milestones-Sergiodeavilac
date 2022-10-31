@@ -38,13 +38,25 @@ def Inverse_Euler(U, dt, t, F):
 
 #LeapFrog
 def LeapFrog(U, dt, t, F):
-     
-    N = int(len(U)/2)
-    X = U
-    A = F(X,t)
-    X[N:] += A[N:]*dt / 2
-    X[:N] += X[:N]*dt
-    A = F(X,t)
-    X[N:] += A[N:]*dt / 2
     
-    return X
+    if t == 0:
+        U = Euler(U, dt, t, F)
+    else:
+        N = int(len(U)/2)
+        # X = U
+        # U_ = F(X,t)
+        # X[N:] += U_[N:]*dt / 2
+        # X[:N] += U_[:N]*dt
+        # U_ = F(X,t)
+        # X[N:] += U_[N:]*dt / 2
+        # U = X
+        
+        
+        U_ = F(U,t)
+        U[N:] += U_[N:]*dt / 2
+        U[:N] += U_[:N]*dt
+        U_ = F(U,t)
+        U[N:] += U_[N:]*dt / 2
+        
+    
+    return U

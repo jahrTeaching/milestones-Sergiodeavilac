@@ -1,12 +1,12 @@
 import matplotlib.pyplot as plt
-from numpy import sqrt
+from numpy import sqrt, size, linspace, zeros
 import os
 
 def Plot_CP(U, t, T, dt, T_S, Save):
     fig, ax = plt.subplots( figsize = (10, 10) )
     ax.plot(t, U[0,:], label = T_S + "dt " + str(dt))
-    ax.set_xlabel('x')
-    ax.set_ylabel('y')
+    ax.set_xlabel('t [s]')
+    ax.set_ylabel('x')
     ax.set_title(T_S)
     ax.legend()
     
@@ -18,8 +18,8 @@ def Plot_CP_all(U, t, T, dt, T_S, Save):
     colors = ['r','b','g']
     for i in t:
         ax.plot(t[i], U[i][0,:], color = colors[int(i)], label= T_S + " dt " + str(dt[int(i)]))
-    ax.set_xlabel('x')
-    ax.set_ylabel('y')
+    ax.set_xlabel('t [s]')
+    ax.set_ylabel('x')
     ax.set_title(T_S + ' compare dt for T = ' + str(T))
     ax.legend()
     
@@ -72,13 +72,32 @@ def Plot_Conv_Rat(x, y, T, dt, regress, T_S, Save):
     file = T_S +'_dt_'+ str(dt) +'_conver' + ".png"
     Save_plot(Save, file)
 
-def Plot_SR(w,T_S, Save):
-    fig,ax = plt.subplots(figsize = (10,10))
-    ax.plot =(w.real, w.imag)
+def Plot_SR(w, dt, T_S, Save):
+    ax = plt.figure(figsize = (10, 10))
+    if T_S == 'LeapFrog':
+        Im = linspace(-1,1,100)
+        Re = zeros(100)
+        
+        ax = plt.plot(Re, Im, color = '#0013ff')
+        
+    else:
+        N = len(w)
+        x = linspace(-5,5,N)
+        y = linspace(-5,5,N)
+        ax = plt.contour(x,y, w, levels = [0, 1], colors = ['#0013ff'])
+        ax = plt.contourf(x,y, w, levels = [0, 1], colors =['#626262'])
+    
+    colors = ['r','orange','g']
+    
+    for i in range(len(dt)):
+        plt.plot([0,0], [dt[i],-dt[i]], 'o', color = colors[i], label = "Oscilator's Roots by dt " + str(dt[i]))
+    plt.ylabel("Im")
+    plt.xlabel("Re")
+    plt.legend()
+    plt.grid()
     
     file = 'Stability Region of ' + T_S + ".png"
     Save_plot(Save, file)
-    
     
 def Save_plot(Save, file):
     
