@@ -32,12 +32,12 @@ for i in range(len(dt)):
 
 
 # # #Simulations
-# for j in range ( len(T_S_plot) ):
-#         for x in t_dic: # x is a str and U is creating new keys
-#                 U_dic[x]= C_P(Linear_Oscilator, t_dic[x], U0, T_S[j])
-#                 plt.Plot_CP(U_dic[x], t_dic[x], T, dt[int(x)], T_S_plot[j], Save) # x return the value of the key
-#         plt.Plot_CP_all(U_dic,t_dic,T, dt, T_S_plot[j], Save)
-#         print(T_S_plot[j] + " calculado \n")
+for j in range ( len(T_S_plot) ):
+        for x in t_dic: # x is a str and U is creating new keys
+                U_dic[x]= C_P(Linear_Oscilator, t_dic[x], U0, T_S[j])
+                plt.Plot_CP(U_dic[x], t_dic[x], T, dt[int(x)], T_S_plot[j], Save) # x return the value of the key
+        plt.Plot_CP_all(U_dic,t_dic,T, dt, T_S_plot[j], Save)
+        print(T_S_plot[j] + " calculado \n")
 
 # #Stability Region
 
