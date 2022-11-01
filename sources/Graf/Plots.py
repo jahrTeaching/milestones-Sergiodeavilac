@@ -9,6 +9,7 @@ def Plot_CP(U, t, T, dt, T_S, Save):
     ax.set_ylabel('x')
     ax.set_title(T_S)
     ax.legend()
+    ax.grid()
     
     file = T_S + "_dt_" + str(dt) +".png"
     Save_plot(Save, file)
@@ -22,6 +23,7 @@ def Plot_CP_all(U, t, T, dt, T_S, Save):
     ax.set_ylabel('x')
     ax.set_title(T_S + ' compare dt for T = ' + str(T))
     ax.legend()
+    ax.grid()
     
     file = T_S + ".png"
     Save_plot(Save, file)
@@ -72,7 +74,7 @@ def Plot_Conv_Rat(x, y, T, dt, regress, T_S, Save):
     file = T_S +'_dt_'+ str(dt) +'_conver' + ".png"
     Save_plot(Save, file)
 
-def Plot_SR(w, dt, T_S, Save):
+def Plot_SR(r, dt, T_S, Save):
     ax = plt.figure(figsize = (10, 10))
     if T_S == 'LeapFrog':
         Im = linspace(-1,1,100)
@@ -81,11 +83,11 @@ def Plot_SR(w, dt, T_S, Save):
         ax = plt.plot(Re, Im, color = '#0013ff')
         
     else:
-        N = len(w)
+        N = len(r)
         x = linspace(-5,5,N)
         y = linspace(-5,5,N)
-        ax = plt.contour(x,y, w, levels = [0, 1], colors = ['#0013ff'])
-        ax = plt.contourf(x,y, w, levels = [0, 1], colors =['#626262'])
+        ax = plt.contour(x,y, r, levels = [0, 1], colors = ['#0013ff'])
+        ax = plt.contourf(x,y, r, levels = [0, 1], colors =['#626262'])
     
     colors = ['r','orange','g']
     
@@ -93,6 +95,9 @@ def Plot_SR(w, dt, T_S, Save):
         plt.plot([0,0], [dt[i],-dt[i]], 'o', color = colors[i], label = "Oscilator's Roots by dt " + str(dt[i]))
     plt.ylabel("Im")
     plt.xlabel("Re")
+    plt.title('Stability Region of ' + T_S )
+    # plt.xlim([-2, 2])
+    # plt.ylim([-2, 2])
     plt.legend()
     plt.grid()
     
