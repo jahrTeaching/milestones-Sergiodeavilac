@@ -15,10 +15,12 @@ dt = [0.1, 0.01, 0.001]
 #Save Plots
 Save = True # True Save the plots / False show the plots
 
+# # # Temporal_Schemes to use
+# T_S = [Euler, RK4, Crank_Nicolson, Inverse_Euler, LeapFrog]
+# T_S_plot = ["Euler", "RK4", "CN", 'Euler_inver', "LeapFrog"]
 # # Temporal_Schemes to use
-T_S = [Euler, RK4, Crank_Nicolson, Inverse_Euler, LeapFrog]
-T_S_plot = ["Euler", "RK4", "CN", 'Euler_inver', "LeapFrog"]
-
+T_S = [LeapFrog]
+T_S_plot = [ "LeapFrog"]
 #Initiation of Dictionaries
 t_dic = { }
 U_dic = { }     
@@ -34,7 +36,7 @@ for i in range(len(dt)):
 # # #Simulations
 for j in range ( len(T_S_plot) ):
         for x in t_dic: # x is a str and U is creating new keys
-                U_dic[x]= C_P(Linear_Oscilator, t_dic[x], U0, T_S[j])
+                U_dic[x]= C_P(Linear_Oscilator, t_dic[x], U0, T_S[j], T_S_plot[j])
                 plt.Plot_CP(U_dic[x], t_dic[x], T, dt[int(x)], T_S_plot[j], Save) # x return the value of the key
         plt.Plot_CP_all(U_dic,t_dic,T, dt, T_S_plot[j], Save)
         print(T_S_plot[j] + " calculado \n")
