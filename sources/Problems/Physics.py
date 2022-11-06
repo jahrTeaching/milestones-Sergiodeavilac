@@ -1,4 +1,5 @@
-from numpy import array
+from numpy import array, reshape, zeros
+from numpy.linalg import norm
 
 #Kepler
 def Kepler(U, t): 
@@ -12,4 +13,29 @@ def Kepler(U, t):
 def Linear_Oscilator(U,t):
     
     return array([U[1], -U[0]])
-        
+
+def N_B(U,t):
+    
+    (Nb, Nc) = (2,3)
+    
+    Us = reshape( U, (Nb,Nc, 2) ) # Tensor Nb, Nc, (Position, Velocity)
+    
+    r = reshape( Us[:,:,0], (Nb,Nc) ) # Matrix Position 
+    v = reshape( Us[:,:,1], (Nb, Nc) ) # Matrix Velocity
+    
+    F = zeros( len(U) )
+    Fs = reshape( F, (Nb, Nc, 2) ) # Tensor Nb, Nc, (Position, Velocity) 
+    
+    drdt = reshape( Fs[:,:,0], (Nb,Nc) ) # Matrix Velocity
+    dvdt = reshape( Fs[:,:,1], (Nb,Nc) ) # Matrix Acceleration
+    
+    dvdt[:,:] = 0
+    
+    for i in range(Nb):
+        drdt[i,:] = v[i,:]
+        for j in range(Nb):
+            if j != i:
+                d = r[j,:] - r[i,:]
+                dvdt[i,:] +=  d[:]/( norm(d)**3)
+            
+    return F

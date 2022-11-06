@@ -34,7 +34,7 @@ def Inverse_Euler(U, dt, t, F):
         
         return x - U - dt*F(x,t)
 
-    return Newton_LU(Euler_res, U)
+    return fsolve(Euler_res, U)
 
 #LeapFrog
 def LeapFrog(U1, U, dt, t, F):

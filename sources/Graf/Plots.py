@@ -1,10 +1,10 @@
 import matplotlib.pyplot as plt
-from numpy import sqrt, size, linspace, zeros
+from numpy import sqrt, size, linspace, zeros, shape
 import os
 
 def Plot_CP(U, t, T, dt, T_S, Save):
     fig, ax = plt.subplots( figsize = (10, 10) )
-    ax.plot(t, U[0,:], label = T_S + "dt " + str(dt))
+    ax.plot(U[0,:], U[1,:], label = T_S + "dt " + str(dt))
     ax.set_xlabel('t [s]')
     ax.set_ylabel('x')
     ax.set_title(T_S)
@@ -18,7 +18,7 @@ def Plot_CP_all(U, t, T, dt, T_S, Save):
     fig, ax = plt.subplots( figsize=(10, 10) )
     colors = ['r','b','g']
     for i in t:
-        ax.plot(t[i], U[i][0,:], color = colors[int(i)], label= T_S + " dt " + str(dt[int(i)]))
+        ax.plot( U[i][0,:], U[i][1,:], color = colors[int(i)], label= T_S + " dt " + str(dt[int(i)]))
     ax.set_xlabel('t [s]')
     ax.set_ylabel('x')
     ax.set_title(T_S + ' compare dt for T = ' + str(T))
@@ -102,6 +102,22 @@ def Plot_SR(r, dt, T_S, Save):
     plt.grid()
     
     file = 'Stability Region of ' + T_S + ".png"
+    Save_plot(Save, file)
+    
+    
+def Plot_NBodies(U, t, T, dt, T_S, Save):
+    fig, ax = plt.subplots( figsize = (10, 10) )
+    ax = plt.axes(projection = '3d')
+    for i in range(2):
+        ax.plot(U[i*3,:], U[1 + (i*3),:], U[2 + (i*3),:], label = T_S + "dt " + str(dt))
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
+    ax.set_zlabel('z')
+    ax.set_title(T_S)
+    ax.legend()
+    ax.grid()
+    
+    file = T_S + "_dt_" + str(dt) +".png"
     Save_plot(Save, file)
     
 def Save_plot(Save, file):

@@ -6,7 +6,7 @@
             "type": "python",
             "request": "launch",
             "console": "integratedTerminal",
-            "program": "${workspaceFolder}/Milestone_4.py"
+            "program": "${workspaceFolder}/Milestone_5.py"
         }
     ]
 }
