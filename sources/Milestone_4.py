@@ -18,8 +18,8 @@ Save = False # True Save the plots / False show the plots
 # Temporal_Schemes to use
 # T_S = [Euler, RK4, Crank_Nicolson, Inverse_Euler, LeapFrog]
 # T_S_plot = ["Euler", "RK4", "CN", 'Euler_inver', "LeapFrog"]
-T_S = [LeapFrog]
-T_S_plot = [ "LeapFrog"]
+T_S = [Inverse_Euler]
+T_S_plot = [ "Euler_inver"]
 
 #Initiation of Dictionaries
 t_dic = { }

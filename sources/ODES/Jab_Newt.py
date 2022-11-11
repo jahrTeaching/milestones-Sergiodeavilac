@@ -66,21 +66,31 @@ def Inversa(A):
     return B
         
 def Newton(F,x0):
-    N = size(x0)
-    dx = 2 * x0
-    it = 0 #Initialization of iterations
-    itmax = 1000 #max iterations
-    eps = 1 # initial error
     
-    while (eps > 1e-8) and (it <= itmax):
-        it = it + 1
-        Jab = Jacobiano(F, x0)
-        b = F(x0)
-        dx = dot( inv(Jab), b)
-        x0 = x0 - dx
-        eps = norm(dx)
-    return x0
-
+    if type(x0) == "numpy.ndarray":
+        N = size(x0)
+        dx = 2 * x0
+        it = 0 #Initialization of iterations
+        itmax = 1000 #max iterations
+        eps = 1 # initial error
+        
+        while (eps > 1e-8) and (it <= itmax):
+            it = it + 1
+            Jab = Jacobiano(F, x0)
+            b = F(x0)
+            dx = dot( inv(Jab), b)
+            x0 = x0 - dx
+            eps = norm(dx)
+        return x0
+    
+    else:
+        for i in range(1000):
+            it = 0
+            x1 = x0 - F(x0) / prime(F,x0)
+            x0 = x1
+            it += 1
+        return x0
+    
 def Newton_LU(F,x0):
     N = size(x0)
     dx = 2 * x0
@@ -95,4 +105,8 @@ def Newton_LU(F,x0):
         eps = norm(dx)
         
     return x0
+
+def prime(F, x):
+
+    return (F(x + 10e-6) - F(x - 10e-6)) / 20e-6
 

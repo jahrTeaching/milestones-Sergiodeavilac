@@ -1,6 +1,6 @@
 from numpy import array, zeros, shape, size
 from scipy.optimize import fsolve
-from ODES.Jab_Newt import Newton, Newton_LU
+from ODES.Jab_Newt import Newton_LU, Newton
 
 #Euler_Method###########################################
 def Euler(U , dt, t, F):
@@ -26,7 +26,7 @@ def Crank_Nicolson(U, dt, t, F):
     
     U_temp = U + dt/2 * F(U, t)
     
-    return fsolve(CN_res, U)
+    return Newton(CN_res, U)
 
 #Euler_inverso#########################################
 def Inverse_Euler(U, dt, t, F):
@@ -34,7 +34,7 @@ def Inverse_Euler(U, dt, t, F):
         
         return x - U - dt*F(x,t)
 
-    return fsolve(Euler_res, U)
+    return Newton(Euler_res, U)
 
 #LeapFrog
 def LeapFrog(U1, U, dt, t, F):
