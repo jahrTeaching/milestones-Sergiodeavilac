@@ -1,12 +1,29 @@
-import matplotlib.pyplot as plt
-import numpy as np
-x = np.arange(1, 10)
-y = x.reshape(-1, 1)
-h = x * y
+from scipy.optimize import newton
+from numpy import linspace, zeros, absolute
 
-cs = plt.contourf(h, levels=[10, 30, 50],
-    colors=['#808080', '#A0A0A0', '#C0C0C0'], extend='both')
-# cs.cmap.set_over('red')
-# cs.cmap.set_under('blue')
+def Stability_region(T_S):
+    
+    return absolute(T_S(1.,1.,0.,P))
 
-plt.show
+def P(U,t):
+    N = 100
+    R = linspace(-5,5,N)
+    I = linspace(-5,5,N)
+    w = zeros([N, N], dtype = complex)
+    for i in range(N):
+        for j in range(N):
+            w[j,i] = complex(R[i], I[j])
+    return w*U
+
+
+def Crank_Nicolson(U, dt, t, F):
+    
+    def CN_res(x):
+        
+        return x - U_temp -dt/2 * F(x, t + dt)
+    
+    U_temp = U + dt/2 * F(U, t)
+    
+    return newton(CN_res, U)
+
+S_R = Stability_region(Crank_Nicolson)

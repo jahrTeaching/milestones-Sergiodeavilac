@@ -4,12 +4,13 @@ from ODES.Jab_Newt import Newton_LU, Newton
 
 #Euler_Method###########################################
 def Euler(U , dt, t, F):
+    Euler.__name__ = "Euler"
     
     return U + dt * F(U,t)
 
 #Runge-Kutta cuarto orden##############################  
 def RK4(U, dt, t, F):
-        
+    RK4.__name__ = "Runge_Kutta 4"
     k1 = F(U,t)
     k2 = F(U + dt * k1 / 2, t)
     k3 = F(U + dt * k2 / 2, t)
@@ -19,6 +20,7 @@ def RK4(U, dt, t, F):
 
 #Crank-Nicolson#########################################
 def Crank_Nicolson(U, dt, t, F):
+    Crank_Nicolson.__name__ = "Crank Nicolson"
     
     def CN_res(x):
         
@@ -30,6 +32,7 @@ def Crank_Nicolson(U, dt, t, F):
 
 #Euler_inverso#########################################
 def Inverse_Euler(U, dt, t, F):
+    Inverse_Euler.__name__ = "Euler Inverso"
     def Euler_res(x):
         
         return x - U - dt*F(x,t)
@@ -38,5 +41,6 @@ def Inverse_Euler(U, dt, t, F):
 
 #LeapFrog
 def LeapFrog(U1, U, dt, t, F):
+    LeapFrog.__name__ = "LeapFrog"
     
     return U + 2*dt*F(U1,t)
