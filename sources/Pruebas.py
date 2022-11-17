@@ -3,7 +3,7 @@ from numpy import linspace, zeros, absolute
 
 def Stability_region(T_S):
     
-    return absolute(T_S(1.,1.,0.,P))
+    return absolute(T_S (1., 1., 0., P) )
 
 def P(U,t):
     N = 100
