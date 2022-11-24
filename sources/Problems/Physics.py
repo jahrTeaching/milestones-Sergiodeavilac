@@ -1,4 +1,4 @@
-from numpy import array, reshape, zeros
+from numpy import array, reshape, zeros, shape
 from numpy.linalg import norm
 
 #Kepler
@@ -14,7 +14,21 @@ def Linear_Oscilator(U,t):
     
     return array([U[1], -U[0]])
 
+def split(U):
+    Nc = 3
+    Nb = int(shape(U)[1] / (2*Nc))
+    N = shape(U)[0] - 1
+    
+    Us = reshape( U, (N+1, Nb, Nc, 2) )
+    
+    return reshape( Us[:, :, :, 0], (N+1, Nb, Nc) )
 
+def join(r0, v0, Nc, Nb):
+    U0 =  zeros(2*Nc*Nb)
+    U1  = reshape( U0, (Nb, Nc, 2) )  
+    U1[:,:,0] = r0
+    U1[:,:,1] = v0
+    return U0
 
 def N_B(U,t): # N-Bodies problem 
     
