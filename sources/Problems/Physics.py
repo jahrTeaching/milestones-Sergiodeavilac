@@ -14,9 +14,14 @@ def Linear_Oscilator(U,t):
     
     return array([U[1], -U[0]])
 
+
+
 def N_B(U,t): # N-Bodies problem 
     
-    (Nb, Nc) = (4,3)
+    Nc = 3
+    Nb = int(len(U) / (2*Nc))
+    
+    # (Nb, Nc) = (4,3)
     
     Us = reshape( U, (Nb, Nc, 2) ) # Tensor Nb, Nc, (Position, Velocity)
     
