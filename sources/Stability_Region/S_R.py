@@ -1,5 +1,4 @@
 from numpy import sqrt, linspace, zeros, absolute, array
-from matplotlib.pylab import plt
 
 def Stability_Region(T_S):
     N = 100

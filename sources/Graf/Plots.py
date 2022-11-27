@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from numpy import sqrt, size, linspace, zeros, reshape
+from numpy import sqrt, size, linspace, zeros, shape
 import os
 
 def Plot_CP(U, t, T, dt, T_S, Save):
@@ -108,7 +108,8 @@ def Plot_SR(r, dt, T_S, Save):
 def Plot_NBodies(r, t, T, dt, T_S, Save):
     fig, ax = plt.subplots( figsize = (10, 10) )
     ax = plt.axes(projection = '3d')
-    for i in range(4):
+    N = shape(r)[1]
+    for i in range(N):
         ax.plot(r[:,i,0], r[:,i,1], r[:,i,2], label = T_S + "dt " + str(dt))
     ax.set_xlabel('x')
     ax.set_ylabel('y')
