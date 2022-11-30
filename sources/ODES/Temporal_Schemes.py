@@ -39,8 +39,9 @@ def Inverse_Euler(U, dt, t, F):
 
     return Newton(Euler_res, U)
 
-#LeapFrog
+#LeapFrog ##############################################
 def LeapFrog(U1, U, dt, t, F):
     LeapFrog.__name__ = "LeapFrog"
     
     return U + 2*dt*F(U1,t)
+

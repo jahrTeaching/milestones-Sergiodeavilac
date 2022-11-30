@@ -4,6 +4,7 @@ from Problems.Physics import Linear_Oscilator
 from ODES.Temporal_Schemes import Euler, RK4, Crank_Nicolson, Inverse_Euler, LeapFrog
 from Stability_Region.S_R import Stability_Region
 import Graf.Plots as plt
+from ODES.ERK import ERK_sheme
 
 #Initial Conditions
 r0 = [1]
@@ -12,15 +13,14 @@ U0 = r0 + v0
 T = 30
 dt = [0.1, 0.01, 0.001]
 
+
 #Save Plots
 Save = False # True Save the plots / False show the plots
 
 # Temporal_Schemes to use
-# T_S = [Euler, RK4, Crank_Nicolson, Inverse_Euler, LeapFrog]
+T_S = [Euler, RK4, Crank_Nicolson, Inverse_Euler, LeapFrog]
 T_S_plot = ["Euler", "RK4", "CN", 'Euler_inver', "LeapFrog"]
 
-T_S = [Crank_Nicolson]
-T_S_plot = [ "CN"]
 
 #Initiation of Dictionaries
 t_dic = { }
@@ -34,13 +34,13 @@ for i in range(len(dt)):
         t_dic[str(i)] = linspace(0,T, int(N[i]))
 
 
-# # #Simulations
-# for j in range ( len(T_S_plot) ):
-#         for x in t_dic: # x is a str and U is creating new keys
-#                 U_dic[x]= C_P(Linear_Oscilator, t_dic[x], U0, T_S[j], T_S_plot[j])
-#                 plt.Plot_CP(U_dic[x], t_dic[x], T, dt[int(x)], T_S_plot[j], Save) # x return the value of the key
-#         plt.Plot_CP_all(U_dic,t_dic,T, dt, T_S_plot[j], Save)
-#         print(T_S_plot[j] + " calculado \n")
+# #Simulations
+for j in range ( len(T_S_plot) ):
+        for x in t_dic: # x is a str and U is creating new keys
+                U_dic[x]= C_P(Linear_Oscilator, t_dic[x], U0, T_S[j], T_S_plot[j])
+                plt.Plot_CP(U_dic[x], t_dic[x], T, dt[int(x)], T_S_plot[j], Save) # x return the value of the key
+        plt.Plot_CP_all(U_dic,t_dic,T, dt, T_S_plot[j], Save)
+        print(T_S_plot[j] + " calculado \n")
 
 #Stability Region
 
