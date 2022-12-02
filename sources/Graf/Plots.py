@@ -103,8 +103,7 @@ def Plot_SR(r, dt, T_S, Save):
     
     file = 'Stability Region of ' + T_S + ".png"
     Save_plot(Save, file)
-    
-    
+       
 def Plot_NBodies(r, t, T, dt, T_S, Save):
     fig, ax = plt.subplots( figsize = (10, 10) )
     ax = plt.axes(projection = '3d')
@@ -121,6 +120,27 @@ def Plot_NBodies(r, t, T, dt, T_S, Save):
     file = T_S + "_dt_" + str(dt) +".png"
     Save_plot(Save, file)
     
+def Plot_LPO(U, L_P, mu, T_S, i, Save):
+    
+    LP = ["L4", "L5", "L3", "L1", "L2"]
+    
+    fig, ax = plt.subplots( figsize = (10, 10) )
+
+    for i in range( len(L_P) ):
+        ax.plot( L_P[i, 0],L_P [i, 1], 'o', 'r', label = 'Lagrange points' )
+        
+    ax.plot(U[0,:], U[1,:], 'b', label = "Orbit")
+    ax.set_xlabel("x")
+    ax.set_ylabel("y")
+    ax.set_title("Lagrange Points of Earth-Moon System and Orbit arround ")
+    plt.legend
+    ax.grid()
+    
+    name = T_S.__name__
+    file = name + "_Lagrange Point_" +str(i)  +".png"
+    
+    Save_plot(Save, file)
+
 def Save_plot(Save, file):
     
     if not Save:

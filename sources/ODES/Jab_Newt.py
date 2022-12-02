@@ -3,11 +3,12 @@ from numpy.linalg import norm, inv
 
 def Jacobiano (F, xp):
     N = size(xp)
-    dx = 1e-3
+    dx = 1e-10
     
-    x = zeros(N)
+    
     Jab = zeros([N,N])
     for j in range(N):
+        x = zeros(N)
         x[j] = dx
         Jab[:,j] = ( F(xp + x ) - F(xp - x) ) /(2*dx)
     return Jab

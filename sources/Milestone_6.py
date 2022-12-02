@@ -1,35 +1,59 @@
-from numpy import array, save, zeros, linspace, shape, reshape, transpose
-from ODES.Cauchy_Problem import C_P
+from numpy import array, save, zeros, linspace, shape, reshape, around
+from ODES.Cauchy_Problem import C_P, C_P_line
+from Problems.NB3_restrict import RBP, Lagrange_points, stb_Lp
 from Problems.Physics import N_B, split, join
 from ODES.Temporal_Schemes import Euler, RK4, Crank_Nicolson, Inverse_Euler, LeapFrog
+from ODES.ERK import ERK_sheme
+from random import random
 import Graf.Plots as plt
 
+# Save plot
+Save = False
 
-#Initial Conditions
-(Nb, Nc) = (4,3)
+# Temporal_Scheme
 
-r0 = zeros( (Nb, Nc) )
-v0 = zeros( (Nb, Nc) )
-r0[0,:] = [1,0,0]; r0[1,:] = [-1,0,0]; r0[2, :] = [ 0, 1, 0 ]; r0[3, :] = [ 0, -1, 0 ] # Position
-v0[0,:] = [0, 0.4, 0]; v0[1,:] = [0, -0.4, 0]; v0[2, :] = [ -0.4, 0., 0. ]; v0[3, :] = [ 0.4, 0., 0. ] # Velocity
-# r0[0,:] = [1,0,0]; r0[1,:] = [1,1,0]
-# v0[0,:] = [0, 0, -1]; v0[1,:] = [1, -1,-1]
+T_S = T_S = [Euler, RK4, Crank_Nicolson, Inverse_Euler, LeapFrog, ERK_sheme]
 
-# Join the initial conditions in a vector
-U0 = join(r0, v0, Nc, Nb) 
+# Data of the system
+mu_earth_Moon = 1.2151e-2
 
-#Save Plots
-Save = False # True Save the plots / False show the plots
-
-#Iterations and times
+#Initial Conditions for interpolation
 N = 10000
-T = 10
-t = linspace(0,T,N+1)
+t = linspace(0, 100, N)
 
-# Simulations
-U = transpose( C_P(N_B, t, U0, RK4, "RK4") )
+U0 = zeros( [5,4] ) # Number of Lagrange points and coordiantes
 
-# Separate the solutions in tensors
-r = split(U)
-   
-plt.Plot_NBodies(r, t, T, 15/1000, "Rk4", Save) # x return the value of the key
+U0[0,:] = [0.8, 0.6, 0 , 0]
+U0[1,:] = [0.8, -0.6, 0, 0]
+U0[2,:] = [-0.1, 0, 0, 0]
+U0[3,:] = [0.1, 0, 0, 0]
+U0[4,:] = [1.01, 0, 0, 0]
+
+L_p = Lagrange_points(U0, 5, mu_earth_Moon)
+print("\n" + str(L_p) + "\n")
+
+#Stability of Lagrande Points
+L_p_stb = zeros( 4 )
+
+for i in range( len(L_p_stb) ):
+    L_p_stb[:2] = L_p[i, :]
+    stb = around( stb_Lp(L_p_stb, mu_earth_Moon), 5)
+    print(str(stb) + "\n")
+
+#Lagrange Point's Orbits
+
+U_0LPO = zeros( [shape(U0)[0], 4] )
+
+eps = 1e-3 # Perturbación para poder obtener el movimiento
+
+for i in range( shape(U0)[0] ):
+    U_0LPO[i, :2] = L_p[i, :] + eps
+    U_0LPO[i, 2:] = eps
+
+def F(U,t):
+   return RBP(U, t, mu_earth_Moon)
+
+for j in range ( len(T_S) ):
+    for i in range( shape(U0)[0] ):
+        U_LP = C_P(F, t, U_0LPO[i,:], T_S) # Opción 1#Meto fila y me devuelve en columnas
+        plt.Plot_LPO(U_LP, L_p, mu_earth_Moon, i, Save)
