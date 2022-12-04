@@ -109,37 +109,51 @@ def Plot_NBodies(r, t, T, dt, T_S, Save):
     ax = plt.axes(projection = '3d')
     N = shape(r)[1]
     for i in range(N):
-        ax.plot(r[:,i,0], r[:,i,1], r[:,i,2], label = T_S + "dt " + str(dt))
+        ax.plot(r[:,i,0], r[:,i,1], r[:,i,2], label = "Orbit " + str(i+1))
     ax.set_xlabel('x')
     ax.set_ylabel('y')
     ax.set_zlabel('z')
-    ax.set_title(T_S)
+    ax.set_title(T_S + "; T = " + str(T) + "; dt = " + str(dt))
     ax.legend()
     ax.grid()
     
     file = T_S + "_dt_" + str(dt) +".png"
     Save_plot(Save, file)
     
-def Plot_LPO(U, L_P, mu, T_S, i, Save):
+def Plot_LPO(U, L_P, mu, T_S, j, Save):
     
     LP = ["L4", "L5", "L3", "L1", "L2"]
     
     fig, ax = plt.subplots( figsize = (10, 10) )
 
     for i in range( len(L_P) ):
-        ax.plot( L_P[i, 0],L_P [i, 1], 'o', 'r', label = 'Lagrange points' )
+        ax.plot( L_P[i, 0],L_P [i, 1], 'o', label = LP[i] )
         
-    ax.plot(U[0,:], U[1,:], 'b', label = "Orbit")
+    ax.plot( U[0,:], U[1,:], color = 'b', label = "Orbit" )
     ax.set_xlabel("x")
     ax.set_ylabel("y")
-    ax.set_title("Lagrange Points of Earth-Moon System and Orbit arround ")
-    plt.legend
+    ax.set_title("Lagrange Points of Earth-Moon System and Orbit arround " + LP[j])
+    plt.legend()
     ax.grid()
     
     name = T_S.__name__
-    file = name + "_Lagrange Point_" +str(i)  +".png"
+    file = name + "_Lagrange Point_" +str(j)  +".png"
     
     Save_plot(Save, file)
+    
+    if LP[j] == "L4" or LP[j] == "L5": 
+        fig, ay = plt.subplots( figsize = (7,7) )
+        ay.plot( L_P[j, 0],L_P [j, 1], 'o', label = LP[j] )
+        ay.plot( U[0,:], U[1,:], color = 'b', label = "Orbit"  )
+        ay.set_xlabel("x")
+        ay.set_ylabel("y")
+        ay.set_title("Orbit arround" + LP[j])
+        plt.legend()
+        ay.grid()
+        
+        name = T_S.__name__
+        file = name + "_Lagrange Point_Zoom_" +str(j)  +".png"
+        Save_plot(Save, file)
 
 def Save_plot(Save, file):
     

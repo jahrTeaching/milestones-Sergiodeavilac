@@ -2,9 +2,9 @@ from numpy import sqrt, zeros, array
 from numpy.linalg import eig
 from scipy.optimize import newton, fsolve
 from ODES.Jab_Newt import Newton, Jacobiano
-from numba import njit
 
-def RBP(U, t, mu):
+def RBP(U, t, mu): # Arenstorf_equations
+    
     r = U[:2] #Position
     drdt = U[2:] #Velocity
 
@@ -16,8 +16,7 @@ def RBP(U, t, mu):
 
     return array( [ drdt[0], drdt[1], 2*drdt[1] + r[0] + dvdt_1, -2*drdt[0] + r[1] + dvdt_2] )
 
-
-def Lagrange_points(U0, NL, mu):
+def Lagrange_Points(U0, N_LP, mu):
 
     LP = zeros( [5,2] )
 
@@ -28,11 +27,10 @@ def Lagrange_points(U0, NL, mu):
         FX = RBP(X, 0 , mu)
         return FX[2:4]
    
-    for i in range(NL):
+    for i in range(N_LP):
         LP[i,:] = fsolve( F, U0[i,:2] )
         
     return LP
-
 
 def stb_Lp(U_0, mu):
 

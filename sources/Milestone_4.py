@@ -4,7 +4,6 @@ from Problems.Physics import Linear_Oscilator
 from ODES.Temporal_Schemes import Euler, RK4, Crank_Nicolson, Inverse_Euler, LeapFrog
 from Stability_Region.S_R import Stability_Region
 import Graf.Plots as plt
-from ODES.ERK import ERK_sheme
 
 #Initial Conditions
 r0 = [1]

@@ -1,7 +1,10 @@
 from numpy import array, reshape, zeros, shape
 from numpy.linalg import norm
 
-#Kepler
+#------------------------------------------
+# Kepler -----------------------------------
+#------------------------------------------
+
 def Kepler(U, t): 
 
     x = U[0]; y = U[1]; x_dot = U[2]; y_dot = U[3]
@@ -10,9 +13,17 @@ def Kepler(U, t):
     return  array( [ x_dot, y_dot, -x/d, -y/d ] ) 
 
 
+#------------------------------------------
+# Linear Oscilator ------------------------
+#------------------------------------------
+
 def Linear_Oscilator(U,t):
     
     return array([U[1], -U[0]])
+
+#------------------------------------------
+# N_Bodies --------------------------------
+#------------------------------------------
 
 def split(U):
     Nc = 3
@@ -56,5 +67,5 @@ def N_B(U,t): # N-Bodies problem
             if j != i:
                 d = r[j,:] - r[i,:]
                 dvdt[i,:] +=  d[:]/( norm(d)**3)
-            
+  
     return F

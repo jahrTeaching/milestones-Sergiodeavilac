@@ -6,30 +6,35 @@ import Graf.Plots as plt
 
 
 #Initial Conditions
-(Nb, Nc) = (4,3)
+(Nb, Nc) = (4,3) # Number of bodies and coordinates
 
-r0 = zeros( (Nb, Nc) )
-v0 = zeros( (Nb, Nc) )
-r0[0,:] = [1,0,0]; r0[1,:] = [-1,0,0]; r0[2, :] = [ 0, 1, 0 ]; r0[3, :] = [ 0, -1, 0 ] # Position
+r0 = zeros( (Nb, Nc) ) # Position Matrix
+v0 = zeros( (Nb, Nc) ) # Velocity Matrix
+
+r0[0,:] = [1,0,1]; r0[1,:] = [-1,0,-1]; r0[2, :] = [ 0, 1, 2 ]; r0[3, :] = [ -2, -1, 0 ] # Position
 v0[0,:] = [0, 0.4, 0]; v0[1,:] = [0, -0.4, 0]; v0[2, :] = [ -0.4, 0., 0. ]; v0[3, :] = [ 0.4, 0., 0. ] # Velocity
-# r0[0,:] = [1,0,0]; r0[1,:] = [1,1,0]
-# v0[0,:] = [0, 0, -1]; v0[1,:] = [1, -1,-1]
+
+# r0[0,:] = [1,0,0]; r0[1,:] = [-1,0,0]; r0[2, :] = [ 0, 1, 0 ]; r0[3, :] = [ 0, -1, 0 ] # Position
+# v0[0,:] = [0, 0.4, 0]; v0[1,:] = [0, -0.4, 0]; v0[2, :] = [ -0.4, 0., 0. ]; v0[3, :] = [ 0.4, 0., 0. ] # Velocity
+
+# r0[0,:] = [-0.5, -0.5, 0]; r0[1,:] = [0.5, 0.5, 0]
+# v0[0,:] = [0, 0.5, 0.5]; v0[1,:] = [0, -0.5, 0.5]
 
 # Join the initial conditions in a vector
 U0 = join(r0, v0, Nc, Nb) 
 
 #Save Plots
-Save = False # True Save the plots / False show the plots
+Save = True # True Save the plots / False show the plots
 
 #Iterations and times
-N = 10000
-T = 10
-t = linspace(0,T,N+1)
+N = 10000 
+T = 18
+t = linspace(0,T,N+1) # Temporal Mesh
 
 # Simulations
-U = transpose( C_P(N_B, t, U0, RK4, "RK4") )
+U = transpose( C_P(N_B, t, U0, RK4) )
 
 # Separate the solutions in tensors
 r = split(U)
    
-plt.Plot_NBodies(r, t, T, 15/1000, "Rk4", Save) # x return the value of the key
+plt.Plot_NBodies(r, t, T, 15/1000, RK4.__name__, Save) # x return the value of the key
